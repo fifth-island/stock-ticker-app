@@ -1,8 +1,8 @@
 {
-  "name": "helloapp",
+  "name": "calapp",
   "version": "1.0.0",
   "description": "node app ",
-  "main": "hello_app.js",
+  "main": "cal_demo2.js",
   "scripts": {
   "start": "node hello_app.js"
 },
@@ -15,5 +15,9 @@
   "bugs": {
   "url": ""
 },
+"dependencies": {
+    "calendar": "^0.1.1",
+    "mongodb": "^3.6.3"
+  },
   "homepage": ""
 }
