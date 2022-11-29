@@ -4,7 +4,7 @@
   "description": "node app ",
   "main": "cal_demo2.js",
   "scripts": {
-  "start": "node hello_app.js"
+  "start": "node cal_demo2.js"
 },
   "repository": {
   "type": "git",
