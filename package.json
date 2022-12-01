@@ -1,23 +1,23 @@
 {
-  "name": "calapp",
-  "version": "1.0.0",
-  "description": "node app ",
-  "main": "cal_demo2.js",
-  "scripts": {
-  "start": "node cal_demo2.js"
+ "name": "homework-12",
+ "version": "1.0.0",
+ "description": "node app.js",
+ "main": "app.js",
+ "scripts": {
+ "start": "node app.js"
 },
-  "repository": {
-  "type": "git",
-  "url": ""
+ "repository": {
+ "type": "git",
+ "url": ""
 },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-  "url": ""
+ "author": "",
+ "license": "ISC",
+ "bugs": {
+ "url": "https://github.com/fifth-island/stock-ticker/issues"
 },
 "dependencies": {
-    "calendar": "^0.1.1",
-    "mongodb": "^3.6.3"
-  },
-  "homepage": ""
+   "calendar": "^0.1.1",
+   "mongodb": "^3.6.3"
+ },
+ "homepage": ""
 }
