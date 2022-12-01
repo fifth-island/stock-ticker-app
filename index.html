@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+ <head>
+
+ </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Ticker</title>
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <!-- <link rel="stylesheet" href="rules.css"> -->
+  
+ <body>
+
+  <form action="/result" target="_blank" method="POST">
+   <h2> Welcome to our Stock Ticker. </h2>
+
+   <p> Select what type of input you want to use in the search </p>
+
+   <label>Company</label>
+   <input type='radio' name='type_input' id="company_name" value="company">
+   
+   <lable>Ticker</lable>
+   <input type='radio' name='type_input' id="company_ticker" value="ticker">
+
+   <p> Now, provide a word to check in our database </p>
+
+   <label> Search for keyword: </label>
+   <input type='text' name='user_input' value='keyword'>
+
+
+   <input type='submit' name='form_ticker' value='Submit'>
+   
+   <!-- Display answer here -->
+   <div id="answer"></div>
+
+</form>
+  
+  
+ </body>
+
+</html>
