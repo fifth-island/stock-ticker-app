@@ -9,17 +9,17 @@ const MongoClient = require('mongodb').MongoClient;
 const mongoUrl = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
 
 
-const server = http.createServer((req, res) => {
-    // create filepath for any page
-    var filePath = path.join(
-        __dirname,
-        'public',
-        req.url === '/' ? 'index.html' : req.url
-    );
+// const server = http.createServer((req, res) => {
+//     // create filepath for any page
+//     var filePath = path.join(
+//         __dirname,
+//         'public',
+//         req.url === '/' ? 'index.html' : req.url
+//     );
     // console.log(filePath);
 
     // Ensure correct content type is picked
-    var contentType = getContType(filePath);
+    var contentType = getContType('/index.html');
     // console.log(contentType);
 
     if (req.url == '/result') {
@@ -41,14 +41,5 @@ const server = http.createServer((req, res) => {
             // connectAndDisplay(target, type, res);
         });
     } 
-    else { 
-        fs.readFile(filePath, function(err, content) {
-            if (err) { 
-                // display404Page(err, res);
-            }
-            else { 
-             // displayCurrentContent(content, contentType, res); 
-            }
-        });
-    }
+    
 });
