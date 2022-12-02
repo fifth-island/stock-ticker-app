@@ -53,13 +53,12 @@ http.createServer(function (req, res) {
 		 req.on('data', data => {
            pdata += data.toString();
 			 
-			 console.log(pdata);
-			 res.write("Maleficent is a good: " + pdata);
          });
 	
 	
 	         req.on('end', () => { 
 			 pdata = qs.parse(pdata);
+			 res.write("<h1>Johnny</h1>");
 			 res.write("Johnny lai:" + pdata['type_input']);
                  
                  });        
