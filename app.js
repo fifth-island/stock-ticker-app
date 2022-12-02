@@ -27,6 +27,7 @@ http.createServer(function (req, res) {
 
 	   <input type='submit' name='form_ticker' value='Submit'>
 	  `);
+	  res.end();
    
   } else if (req.url == '/result') {
 	  res.write ("Process the form<br>");
@@ -40,10 +41,10 @@ http.createServer(function (req, res) {
 			req.on('end', () => {
 				pdata = qs.parse(pdata);
 				res.write ("The name is: "+ pdata['user_input']);
-// 				res.end();
+				res.end();
 			});
   }
-	res.end();
+// 	res.end();
 }).listen(port);
 
 
