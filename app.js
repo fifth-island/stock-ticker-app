@@ -76,13 +76,15 @@ http.createServer(async function (req, res) {
 		}
 		
 		await curs.forEach(function(item) {
+			if(pdata['type_input'] == 'company') {
 			if(item.Company == pdata['user_input']) {
-				let str = JSON.stringfy(item);
-				let string1 = str.replace(/["]+/g, '');
-				let string2 = string1.replace(/[{}]/g, "");
-				let string3 = string2.replace(/,/g, '  ');
-				res.write(string3 + "<br>");
-				console.log(item);
+// 				let str = JSON.stringfy(item);
+// 				let string1 = str.replace(/["]+/g, '');
+// 				let string2 = string1.replace(/[{}]/g, "");
+// 				let string3 = string2.replace(/,/g, '  ');
+// 				res.write(string3 + "<br>");
+// 				console.log(item);
+			}
 			}
 		});
 		
