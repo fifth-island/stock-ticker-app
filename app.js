@@ -52,11 +52,11 @@ http.createServer(async function (req, res) {
             throw err;
         }
         var dbo = db.db("stock");
-        dbo.collection("equities").find(queryObj).toArray((err, result) => {
-            if (err) throw err;
-            res.write ("WORK PLEASE");
-            db.close();
-        });
+//         dbo.collection("equities").find(queryObj).toArray((err, result) => {
+//             if (err) throw err;
+//             res.write ("WORK PLEASE");
+//             db.close();
+//         });
     })
 
 	pdata = "";
