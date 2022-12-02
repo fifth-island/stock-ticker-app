@@ -7,12 +7,24 @@ http.createServer(function (req, res) {
   if (req.url == "/")
   res.write(`
   <h1>Hi! This is the home page</h1>
-  <form action="/username" method="post"><div><labelEnter user name:</label>
-   <input type="text" name="username"/>
-   </div>
-   <input type="submit" value="send" />
-   </div>
-   </form>
+  <form action="/result" target="_blank" method="POST">
+   <h2> Welcome to our Stock Ticker. </h2>
+
+   <p> Select what type of input you want to use in the search </p>
+
+   <label>Company</label>
+   <input type='radio' name='type_input' id="company_name" value="company">
+   
+   <lable>Ticker</lable>
+   <input type='radio' name='type_input' id="company_ticker" value="ticker">
+
+   <p> Now, provide a word to check in our database </p>
+
+   <label> Search for keyword: </label>
+   <input type='text' name='user_input' value='keyword'>
+
+
+   <input type='submit' name='form_ticker' value='Submit'>
   `);
   
 //     res.setHeader('Content-Type', 'text/html');
