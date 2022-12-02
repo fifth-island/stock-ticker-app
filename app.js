@@ -2,8 +2,8 @@ var http = require('http');
 var qs = require('querystring');
 
 var {MongoClient} = require("mongodb");
-var uri = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-var client = new MongoClient(uri);
+var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+var client = new MongoClient(url);
 
 
 var port = process.env.PORT || 3000;
@@ -37,7 +37,7 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-	await connect();
+	connect();
 
 	pdata = "";
 	req.on('data', data => {
