@@ -6,10 +6,10 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/")
   res.write("This is the home page");
-   return setHomePage(req, res);
+//    return setHomePage(req, res);
   else if (req.url == '/username' && req.method.toLowerCase() == 'post')
   res.write ("This is the about page");
-  return submitUserName(req, res);
+//   return submitUserName(req, res);
    else 
   res.write ("Unknown page request");
   res.end();
