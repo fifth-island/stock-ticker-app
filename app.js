@@ -58,7 +58,11 @@ http.createServer(function (req, res) {
          });
 	
 	
-	         req.on('end', () => { pdata = qs.parse(pdata); });        
+	         req.on('end', () => { 
+			 pdata = qs.parse(pdata);
+			 res.write("Johnny lai:" + pdata['type_input']);
+                 
+                 });        
 	res.end();
 
 		// when complete POST data is received
