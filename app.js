@@ -57,6 +57,8 @@ http.createServer(function (req, res) {
 			 res.write("Maleficent is a good: " + pdata);
          });
 	
+	
+	         req.on('end', () => { pdata = qs.parse(pdata); });        
 	res.end();
 
 		// when complete POST data is received
