@@ -54,8 +54,8 @@ http.createServer(async function (req, res) {
   }
 }).listen(port);
 
-async function connect() {
-    await client.connect();
-    await client.db("stock").command({ping: 1});
+function connect() {
+    client.connect();
+    client.db("stock").command({ping: 1});
     console.log("Server Connected Successfully");
 }
