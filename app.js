@@ -1,9 +1,13 @@
 var http = require('http');
 var qs = require('querystring');
 
-var {MongoClient} = require("mongodb");
-var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-var client = new MongoClient(url);
+var bodyparser = require('body-parser');
+
+var mongodb = require("mongodb");
+// var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+// var client = new MongoClient(url);
+const uri = process.env.MONGODB_URI || "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
+
 
 
 var port = process.env.PORT || 3000;
@@ -55,7 +59,16 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 function connect() {
-    client.connect();
-    client.db("stock").command({ping: 1});
-    console.log("Server Connected Successfully");
+    var MongoClient = mongodb.MongoClient;
+    MongoClient.connect(uri, {useUnifiedTopology: true}, (err, db) => {
+        if (err) {
+            throw err;
+        }
+        var dbo = db.db("equities");
+        dbo.collection("equities").find(queryObj).toArray((err, result) => {
+            if (err) throw err;
+            res.send(parseData(result));
+            db.close();
+        });
+    })
 }
