@@ -73,7 +73,7 @@ http.createServer(async function (req, res) {
 			res.write("No documents found!");
 		}
 		
-// 		await curs.forEach(function(item) {
+		await curs.forEach(function(item) {
 // 			if(pdata['type_input'] == 'company') {
 // 			if(item.Company == pdata['user_input']) {
 // 				let str = JSON.stringfy(item);
@@ -84,7 +84,7 @@ http.createServer(async function (req, res) {
 // 				console.log(item);
 // 			}
 // 			}
-// 		});
+		});
 		
 // 	 var dbo = client.db("stock");
 //          var coll = dbo.collection('equities');
