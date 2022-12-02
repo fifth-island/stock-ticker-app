@@ -1,17 +1,6 @@
-c = require("calendar");
 var http = require('http');
-cal = new c.Calendar();      
 var port = process.env.PORT || 3000;
 //var port = 8080;
-m = cal.monthDates(2022,11, function(d) {
-		return (' '+d.getDate()).slice(-2)}, 
-		function(w) {
-		   s = "";
-		   for (j=0; j<w.length; j++)
-		   	  s += "<div  class='col'>" + w[j] + "</div>";
-		   return s;
-		}
-);
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write  ("<html><head><title>Welcome to our Stock Ticker</title></head>");
