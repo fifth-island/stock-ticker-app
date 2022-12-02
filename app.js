@@ -60,7 +60,7 @@ http.createServer(async function (req, res) {
 
  try {
   res.write("Checkpoint 0");
-  await client.connect();
+   client.connect();
   var dbo = client.db("stock");
   
   res.write("Checkpoint 1");
