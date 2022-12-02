@@ -1,5 +1,8 @@
 const http = require('http');
 
+var port = process.env.PORT || 3000;
+
+
 const server = http.createServer((req, res) => {
  if (req.url == '/') {
    return setHomePage(req, res);
@@ -8,7 +11,7 @@ const server = http.createServer((req, res) => {
  if (req.url == '/username' && req.method.toLowerCase() == 'post') {
   return submitUserName(req, res);
  }
-});
+}).listen(port);
 
 function submitUserName(req, res) {
   res.setHeader('Content-Type', 'text/html');
