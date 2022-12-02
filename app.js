@@ -74,7 +74,7 @@ http.createServer(async function (req, res) {
 		}
 		
 		await curs.forEach(function(item) {
-			if(pdata['type_input'] == 'company') {
+			if(pdata['type_input'] === 'company') {
 				res.write("Type input equals company <br>");
 // 			if(item.Company == pdata['user_input']) {
 // 				let str = JSON.stringfy(item);
