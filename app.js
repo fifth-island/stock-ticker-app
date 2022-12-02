@@ -48,22 +48,17 @@ http.createServer(function (req, res) {
 //   `);
 //    return setHomePage(req, res);
   else if (req.url == '/result' && req.method.toLowerCase() == 'post')
-  res.write ("This is the about page");
-  pdata= "";
-  req.on('data', data => {
-    pdata += data.toString();
-  });
-  
-  req.on('end', () => {
-  pdata =qs.parse(pdata);
-  res.write ("The name is: " + pdata['type_input']);
-  res.end();
-  });
-  
-//   return submitUserName(req, res);
-   else 
-  res.write ("Unknown page request");
-  res.end();
+  res.write ("Process the form<br>");
+		 pdata = "";
+		 req.on('data', data => {
+           pdata += data.toString();
+         });
+
+		// when complete POST data is received
+		req.on('end', () => {
+			pdata = qs.parse(pdata);
+			res.write ("The name is: "+ pdata['the_name']);
+			res.end();
 }).listen(port);
 
 
