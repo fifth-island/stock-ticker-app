@@ -66,7 +66,7 @@ http.createServer(async function (req, res) {
 			projection: { _id: 0, name: 1, ticker: 1 },
 		};
 		
-// 		const curs = equities.find({}, options);
+		const curs = equities.find({}, options);
 		
 // 		if ((curs.count()) === 0) {
 // 			console.log("No documents found!");
