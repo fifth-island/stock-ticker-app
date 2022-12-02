@@ -39,7 +39,7 @@ http.createServer(function (req, res) {
 	// when complete POST data is received
 	req.on('end', () => {
 		pdata = qs.parse(pdata);
-		res.write ("The type chosen is: " + pdata['type_input']);
+		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		res.write ("The name is: " + pdata['user_input']);
 		res.end();
 	});
