@@ -1,46 +1,61 @@
-const http = require('http');
-
-var port = process.env.PORT || 3000;
-
-
-const server = http.createServer((req, res) => {
- if (req.url == '/') {
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type':'text/html'});
+  if (req.url == "/")
+  res.write("This is the home page");
    return setHomePage(req, res);
- }
-
- if (req.url == '/username' && req.method.toLowerCase() == 'post') {
+  else if (req.url == '/username' && req.method.toLowerCase() == 'post')
+  res.write ("This is the about page");
   return submitUserName(req, res);
- }
-}).listen(port);
+   else 
+  res.write ("Unknown page request");
+  res.end();
+}).listen(8080);
 
-function submitUserName(req, res) {
-  res.setHeader('Content-Type', 'text/html');
-  res.statusCode = 302;
-  res.setHeader('Location', '/');
-  return res.end();
-}
 
-function setHomePage(req, res) {
-  res.setHeader('Content-Type', 'text/html');
-  return res.end(`
-  <!doctype html>
-  <html>
-  <head>
-  <title> Stock Ticker </title>
-  </head>
-  <body>
-  <form action="/username" method="post">
-  <div>
-  <labelEnter user name:</label>
-  <input type="text" name="username"/>
-  </div>
-  <input type="submit" value="send" />
-  </div>
-  </form>
-  </body>
-  </html>
-  `);
-}
+// const http = require('http');
+
+// var port = process.env.PORT || 3000;
+
+
+// const server = http.createServer((req, res) => {
+//  if (req.url == '/') {
+//    return setHomePage(req, res);
+//  }
+
+//  if (req.url == '/username' && req.method.toLowerCase() == 'post') {
+//   return submitUserName(req, res);
+//  }
+// }).listen(port);
+
+// function submitUserName(req, res) {
+//   res.setHeader('Content-Type', 'text/html');
+//   res.statusCode = 302;
+//   res.setHeader('Location', '/');
+//   return res.end();
+// }
+
+// function setHomePage(req, res) {
+//   res.setHeader('Content-Type', 'text/html');
+//   return res.end(`
+//   <!doctype html>
+//   <html>
+//   <head>
+//   <title> Stock Ticker </title>
+//   </head>
+//   <body>
+//   <form action="/username" method="post">
+//   <div>
+//   <labelEnter user name:</label>
+//   <input type="text" name="username"/>
+//   </div>
+//   <input type="submit" value="send" />
+//   </div>
+//   </form>
+//   </body>
+//   </html>
+//   `);
+// }
 
 
 // var http = require('http');
