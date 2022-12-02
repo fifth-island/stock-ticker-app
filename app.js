@@ -21,7 +21,7 @@ http.createServer(function (req, res) {
    <p> Now, provide a word to check in our database </p>
 
    <label> Search for keyword: </label>
-   <input type='text' name='user_input' value='keyword'>
+   <input type='text' name='user_input'>
 
 
    <input type='submit' name='form_ticker' value='Submit'>
