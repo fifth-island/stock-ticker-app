@@ -42,9 +42,18 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-        await client.connect();
+        try {
+	 await client.connect();
 	 var dbo = client.db("stock");
          var coll = dbo.collection('equities');
+	}
+	catch (err) {
+	 res.write("Error found");
+	}
+	finally {
+		client.close();
+	}
+	 
 
 
 	pdata = "";
