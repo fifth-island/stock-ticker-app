@@ -50,7 +50,7 @@ http.createServer(function (req, res) {
   else if (req.url == '/result' && req.method.toLowerCase() == 'post')
   res.write ("This is the about page");
   pdata= "";
-  req.on('data'. data => {
+  req.on('data', data => {
     pdata += data.toString();
   });
   
