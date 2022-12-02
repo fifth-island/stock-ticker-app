@@ -52,6 +52,7 @@ http.createServer(function (req, res) {
 		 pdata = "";
 	res.write("<br> Checkpoint 1 <br>");
 		 req.on('data', data => {
+			 res.write("<br> Checkpoint 1.2 <br>");
            pdata += data.toString();
         res.write("<br> Checkpoint 2 <br>");
 			 
