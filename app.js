@@ -7,11 +7,11 @@ http.createServer(function (req, res) {
   if (req.url == "/")
   res.write("This is the home page");
 //     res.setHeader('Content-Type', 'text/html');
-  res.write("<h1>Fill this out</h1>");
-  res.write("<form action='/username' method='post'><label> Enter user name: </label>");
-  res.write("<input type='text' name'username'/>");
-  res.write("<input type='submit' value='send' />");
-  res.write("</form>");
+//   res.write("<h1>Fill this out</h1>");
+//   res.write("<form action='/username' method='post'><label> Enter user name: </label>");
+//   res.write("<input type='text' name'username'/>");
+//   res.write("<input type='submit' value='send' />");
+//   res.write("</form>");
   
   
 //   res.write(`
