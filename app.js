@@ -80,8 +80,8 @@ http.createServer(async function (req, res) {
 
 		    var dbs_stock = database.db('stock');
 		    var mongo_collection = dbs_stock.collection('equities');
-		    mongo_collection.find(pdata['user_input']).toArray((err, result) => {
-		    if (err) throw err;
+// 		    mongo_collection.find(pdata['user_input']).toArray((err, result) => {
+// 		    if (err) throw err;
 // 		    res.send(parseData(result));
 
 		    });
