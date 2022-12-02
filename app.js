@@ -58,12 +58,17 @@ http.createServer(async function (req, res) {
 	});
 
  try {
+  res.write("Checkpoint 0");
   await client.connect();
   var dbo = client.db("stock");
+  
+  res.write("Checkpoint 1");
   var collection = dbo.collection("equities");
   const options = {
    projection: { _id: 0, name: 1, ticker: 1 },
   };
+  
+  res.write("Checkpoint 2");
 
   const curs = collection.find({}, options);
 
