@@ -43,7 +43,7 @@ http.createServer(async function (req, res) {
 	res.write ("Process the form<br>");
 	
         try {
-	 await client.connect();
+	 client.connect();
 	 var dbo = client.db("stock");
          var coll = dbo.collection('equities');
 		res.write("checkpoint 0");
