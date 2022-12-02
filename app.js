@@ -6,6 +6,17 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/")
   res.write("This is the home page");
+    res.setHeader('Content-Type', 'text/html');
+  res.write(`
+  <!doctype html><html><head><title> Stock Ticker </title></head><body><form action="/username" method="post"><div><labelEnter user name:</label>
+  <input type="text" name="username"/>
+  </div>
+  <input type="submit" value="send" />
+  </div>
+  </form>
+  </body>
+  </html>
+  `);
 //    return setHomePage(req, res);
   else if (req.url == '/username' && req.method.toLowerCase() == 'post')
   res.write ("This is the about page");
