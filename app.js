@@ -73,7 +73,9 @@ http.createServer(async function (req, res) {
 			res.write("No documents found!");
 		}
 		
+		res.write("Checkpoint 0 <br>");
 		await curs.forEach(function(item) {
+			res.write("Checkpoint 1 <br>");
 			if(pdata['type_input'] === 'company') {
 				res.write("Type input equals company <br>");
 // 			if(item.Company == pdata['user_input']) {
