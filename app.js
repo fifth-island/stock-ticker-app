@@ -59,7 +59,7 @@ http.createServer(async function (req, res) {
 	try {
 // 	 client.connect();
 		res.write("Checkpoint 0 <br>");
-		await client.connect();
+		client.connect();
 		var database = client.db("stock");
     		var equities = database.collection("equities");
 		
@@ -79,7 +79,7 @@ http.createServer(async function (req, res) {
 		}
 		
 		res.write("Checkpoint 4 <br>");
-		await curs.forEach(function(item) {
+		 curs.forEach(function(item) {
 			res.write("Checkpoint 5 <br>");
 			if(pdata['type_input'] === 'company') {
 				res.write("Type input equals company <br>");
