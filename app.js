@@ -39,6 +39,7 @@ http.createServer(async function (req, res) {
 	
 // 	connect();
 	      client.connect();
+	  client.db("stock").command({ping: 1});
 
 
 	pdata = "";
