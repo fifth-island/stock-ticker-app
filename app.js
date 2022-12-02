@@ -53,7 +53,7 @@ http.createServer(async function (req, res) {
 		pdata = qs.parse(pdata);
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		res.write ("The name is: " + pdata['user_input']);
-		res.end();
+		
 		
 			try {
 	// 	 client.connect();
@@ -103,6 +103,8 @@ http.createServer(async function (req, res) {
 		finally {
 			client.close();
 		}
+		
+	    res.end();
 	});
 	  
 	
