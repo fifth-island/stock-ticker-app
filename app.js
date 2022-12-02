@@ -54,22 +54,15 @@ http.createServer(async function (req, res) {
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		res.write ("The name is: " + pdata['user_input']);
 		
-		
-			try {
-			res.write("Checkpoint 0 <br>");
-			await client.connect();
-			var database = client.db("stock");
-			var equities = database.collection("equities");
+	});
+	  
+	  	try {
+		res.write("Checkpoint 0 <br>");
+		await client.connect();
+		var database = client.db("stock");
+		var equities = database.collection("equities");
 
-			res.write("Checkpoint 1 <br>");
-
-	
-
-			
-
-	// 	 var dbo = client.db("stock");
-	//          var coll = dbo.collection('equities');
-			res.write("checkpoint 0");
+		res.write("Checkpoint 1 <br>");
 		}
 		catch (err) {
 		 res.write("Error found");
@@ -77,11 +70,9 @@ http.createServer(async function (req, res) {
 		finally {
 			client.close();
 		}
-		
-	    res.end();
-	});
 	  
-	
+	res.end();
+
   }
 }).listen(port);
 
