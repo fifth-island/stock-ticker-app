@@ -63,11 +63,7 @@ http.createServer(async function (req, res) {
     		var equities = database.collection("equities");
 		
 		const options = {
-			projection: {
-			_id = 0,
-			name: 1,
-			ticker: 1,
-			},
+			projection: { _id: 0, name: 1, ticker: 1 },
 		};
 		
 // 		const curs = equities.find({}, options);
