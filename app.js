@@ -48,6 +48,16 @@ http.createServer(function (req, res) {
 //    return setHomePage(req, res);
   else if (req.url == '/result' && req.method.toLowerCase() == 'post')
   res.write ("This is the about page");
+  pdata= "";
+  req.on('data'. data => {
+    pdata += data.toString();
+  });
+  
+  req.on('end', () => {
+  res.write ("The name is: " + pdata['type_input']);
+  res.end();
+  });
+  
 //   return submitUserName(req, res);
    else 
   res.write ("Unknown page request");
