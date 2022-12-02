@@ -5,8 +5,7 @@ var qs = require('querystring');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
 
-const client = newMongoClient(url, {userUnifiedTopology: true});
-
+const client =new MongoClient(url,{ useUnifiedTopology: true });
 
 
 var port = process.env.PORT || 3000;
