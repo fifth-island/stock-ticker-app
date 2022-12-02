@@ -42,23 +42,6 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-        try {
-// 	 client.connect();
-		await connect();
-		const database = client.db("stock");
-    		const equities = database.collection("equities");
-// 	 var dbo = client.db("stock");
-//          var coll = dbo.collection('equities');
-		res.write("checkpoint 0");
-	}
-	catch (err) {
-	 res.write("Error found");
-	}
-	finally {
-		client.close();
-	}
-	 
-
 
 	pdata = "";
 	req.on('data', data => {
@@ -72,11 +55,52 @@ http.createServer(async function (req, res) {
 		res.write ("The name is: " + pdata['user_input']);
 		res.end();
 	});
+	  
+	try {
+// 	 client.connect();
+		await client.connect();
+		var database = client.db("stock");
+    		var equities = database.collection("equities");
+		
+		const options = {
+			_id = 0;
+			Company: 1;
+			Ticker: 1;
+		};
+		
+		const curs = equities.find({}, options);
+		
+		if ((curs.count()) === 0) {
+			console.log("No documents found!");
+			res.write("No documents found!");
+		}
+		
+		await curs.forEach(function(item) {
+			if(item.Company == pdata['user_input']) {
+				let str = JSON.stringfy(item);
+				let string1 = str.replace(/["]+/g, '');
+				let string2 = string1.replace(/[{}]/g, "");
+				let string3 = string2.replace(/,/g, '  ');
+				res.write(string3 + "<br>");
+				console.log(item);
+			}
+		});
+		
+// 	 var dbo = client.db("stock");
+//          var coll = dbo.collection('equities');
+		res.write("checkpoint 0");
+	}
+	catch (err) {
+	 res.write("Error found");
+	}
+	finally {
+		client.close();
+	}
   }
 }).listen(port);
 
-async function connect() {
-    await client.connect();
-    await client.db("stock").command({ping: 1});
-    console.log("Server Connected Successfully");
-}
+// async function connect() {
+//     await client.connect();
+//     await client.db("stock").command({ping: 1});
+//     console.log("Server Connected Successfully");
+// }
