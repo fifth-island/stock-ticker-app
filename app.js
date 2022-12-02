@@ -70,10 +70,10 @@ http.createServer(async function (req, res) {
 		
 		const curs = equities.find({}, options);
 		
-		if ((curs.count()) === 0) {
-			console.log("No documents found!");
-			res.write("No documents found!");
-		}
+// 		if ((curs.count()) === 0) {
+// 			console.log("No documents found!");
+// 			res.write("No documents found!");
+// 		}
 		
 // 		await curs.forEach(function(item) {
 // 			if(pdata['type_input'] == 'company') {
