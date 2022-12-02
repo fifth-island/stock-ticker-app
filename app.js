@@ -51,7 +51,7 @@ http.createServer(async function (req, res) {
         if (err) {
             throw err;
         }
-        var dbo = db.db("stock");
+//         var dbo = db.db("stock");
 //         dbo.collection("equities").find(queryObj).toArray((err, result) => {
 //             if (err) throw err;
 //             res.write ("WORK PLEASE");
