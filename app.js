@@ -43,7 +43,10 @@ http.createServer(async function (req, res) {
 	res.write ("Process the form<br>");
 	
         try {
-	 client.connect();
+// 	 client.connect();
+		await connect();
+		const database = client.db("stoker");
+    		const equities = database.collection("equities");
 	 var dbo = client.db("stock");
          var coll = dbo.collection('equities');
 		res.write("checkpoint 0");
@@ -72,8 +75,8 @@ http.createServer(async function (req, res) {
   }
 }).listen(port);
 
-// function connect() {
-//     client.connect();
-//     client.db("stock").command({ping: 1});
-//     console.log("Server Connected Successfully");
-// }
+async function connect() {
+    await client.connect();
+    await client.db("stock").command({ping: 1});
+    console.log("Server Connected Successfully");
+}
