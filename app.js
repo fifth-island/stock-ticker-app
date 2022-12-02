@@ -1,45 +1,22 @@
+c = require("calendar");
 var http = require('http');
-var url = require('url');
-var path = require('path');
-var fs = require('fs');
-var qs = require('querystring');
-const MongoClient = require('mongodb').MongoClient;
-
-// connection string
-const mongoUrl = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-
-
-// const server = http.createServer((req, res) => {
-//     // create filepath for any page
-//     var filePath = path.join(
-//         __dirname,
-//         'public',
-//         req.url === '/' ? 'index.html' : req.url
-//     );
-    // console.log(filePath);
-
-    // Ensure correct content type is picked
-    var contentType = getContType('/index.html');
-    // console.log(contentType);
-
-    if (req.url == '/result') {
-        res.writeHead(200, {'Content-Type': 'text/html'}); 
-        // res.write ("Process the POST request<br>"); 
-        pdata = ""; 
-        req.on('data', data => {
-            pdata += data.toString();
-            // res.write(pdata);
-        })
-        .on('end', () => {
-            pdata = qs.parse(pdata);
-
-            var type = pdata['type_input'];
-            var target = pdata['user_input'];
-            console.log(`User put in ${target} for ${type}.`);
-
-           
-            // connectAndDisplay(target, type, res);
-        });
-    } 
-    
-});
+cal = new c.Calendar();      
+var port = process.env.PORT || 3000;
+//var port = 8080;
+m = cal.monthDates(2022,11, function(d) {
+		return (' '+d.getDate()).slice(-2)}, 
+		function(w) {
+		   s = "";
+		   for (j=0; j<w.length; j++)
+		   	  s += "<div  class='col'>" + w[j] + "</div>";
+		   return s;
+		}
+);
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write  ("<html><head><title>Welcome to our Stock Ticker</title></head>");
+  res.write("<body><br>Select what type of input you want to use in the search<br>");
+  res.write("<label>Company</label><input type='radio' name='type_input' id='company_name' value='company'><lable>Ticker</lable><input type='radio' name='type_input' id='company_ticker' value='ticker'>");
+ 
+ res.end("</body></html>");
+}).listen(port);
