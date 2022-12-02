@@ -1,9 +1,14 @@
 var http = require('http');
 var qs = require('querystring');
 
-var {MongoClient} = require("mongodb");
-var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-var client = new MongoClient(url);
+// var {MongoClient} = require("mongodb");
+// var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+// var client = new MongoClient(url);
+
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
+
+client = new MongoClient(url,{ useUnifiedTopology: true });
 
 
 var port = process.env.PORT || 3000;
@@ -37,28 +42,9 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-// 	connect();
-	  
-	  /* connect to MongoDB cluster */
-	   MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
-	    if (err) {
-		console.log("Unsuccessful connection to Mongo err: " + err);
-		return;
-	    }
-
-	    /* access specific database and collection in the MongoDB cluster  */
-	    // var dbo_stock = database.db("stock");
-	    // var collection = dbo_stock.collection('equities');
-
-	    /* notify the user about the success process */
-	    console.log("The connection with the MongoDB was successful");
-
-	    /* import file data to the MongoDB database */
-// 	    importCSV(database);
-
-	});
-// 	      client.connect();
-// 	  client.db("stock").command({ping: 1});
+        await client.connect();
+	 var dbo = client.db("stock");
+         var coll = dbo.collection('equities');
 
 
 	pdata = "";
