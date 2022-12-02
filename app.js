@@ -3,7 +3,8 @@ var qs = require('querystring');
 
 var port = process.env.PORT || 3000;
 
-http.createServer(function (req, res) {
+http.createServer(async function (req, res) {
+  console.log("Server was successfully created");
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/") {
 	res.write(`
