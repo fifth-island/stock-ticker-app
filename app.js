@@ -46,6 +46,7 @@ http.createServer(async function (req, res) {
 	 await client.connect();
 	 var dbo = client.db("stock");
          var coll = dbo.collection('equities');
+		res.write("checkpoint 0");
 	}
 	catch (err) {
 	 res.write("Error found");
