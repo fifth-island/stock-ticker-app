@@ -58,14 +58,19 @@ http.createServer(async function (req, res) {
 	  
 	try {
 // 	 client.connect();
+		res.write("Checkpoint 0 <br>");
 		await client.connect();
 		var database = client.db("stock");
     		var equities = database.collection("equities");
 		
+		res.write("Checkpoint 1 <br>");
+
 		const options = {
 			projection: { _id: 0, name: 1, ticker: 1 },
 		};
 		
+		res.write("Checkpoint 3 <br>");
+
 		const curs = equities.find({}, options);
 		
 		if ((curs.count()) === 0) {
@@ -73,9 +78,9 @@ http.createServer(async function (req, res) {
 			res.write("No documents found!");
 		}
 		
-		res.write("Checkpoint 0 <br>");
+		res.write("Checkpoint 4 <br>");
 		await curs.forEach(function(item) {
-			res.write("Checkpoint 1 <br>");
+			res.write("Checkpoint 5 <br>");
 			if(pdata['type_input'] === 'company') {
 				res.write("Type input equals company <br>");
 // 			if(item.Company == pdata['user_input']) {
