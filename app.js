@@ -52,6 +52,8 @@ http.createServer(function (req, res) {
 		 pdata = "";
 		 req.on('data', data => {
            pdata += data.toString();
+			 
+			 console.log(pdata);
          });
 
 		// when complete POST data is received
