@@ -62,11 +62,11 @@ http.createServer(async function (req, res) {
 		var database = client.db("stock");
     		var equities = database.collection("equities");
 		
-		const options = {
-			_id = 0;
-			Company: 1;
-			Ticker: 1;
-		};
+// 		const options = {
+// 			_id = 0;
+// 			Company: 1;
+// 			Ticker: 1;
+// 		};
 		
 // 		const curs = equities.find({}, options);
 		
