@@ -47,8 +47,8 @@ http.createServer(async function (req, res) {
 		await connect();
 		const database = client.db("stoker");
     		const equities = database.collection("equities");
-	 var dbo = client.db("stock");
-         var coll = dbo.collection('equities');
+// 	 var dbo = client.db("stock");
+//          var coll = dbo.collection('equities');
 		res.write("checkpoint 0");
 	}
 	catch (err) {
