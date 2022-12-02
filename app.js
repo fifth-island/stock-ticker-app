@@ -54,56 +54,58 @@ http.createServer(async function (req, res) {
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		res.write ("The name is: " + pdata['user_input']);
 		res.end();
+		
+			try {
+	// 	 client.connect();
+			res.write("Checkpoint 0 <br>");
+			client.connect();
+			var database = client.db("stock");
+			var equities = database.collection("equities");
+
+			res.write("Checkpoint 1 <br>");
+
+			const options = {
+				projection: { _id: 0, name: 1, ticker: 1 },
+			};
+
+			res.write("Checkpoint 3 <br>");
+
+			const curs = equities.find({}, options);
+
+			if ((curs.count()) === 0) {
+				console.log("No documents found!");
+				res.write("No documents found!");
+			}
+
+			res.write("Checkpoint 4 <br>");
+			 curs.forEach(function(item) {
+				res.write("Checkpoint 5 <br>");
+				if(pdata['type_input'] === 'company') {
+					res.write("Type input equals company <br>");
+	// 			if(item.Company == pdata['user_input']) {
+	// 				let str = JSON.stringfy(item);
+	// 				let string1 = str.replace(/["]+/g, '');
+	// 				let string2 = string1.replace(/[{}]/g, "");
+	// 				let string3 = string2.replace(/,/g, '  ');
+	// 				res.write(string3 + "<br>");
+	// 				console.log(item);
+	// 			}
+				}
+			});
+
+	// 	 var dbo = client.db("stock");
+	//          var coll = dbo.collection('equities');
+			res.write("checkpoint 0");
+		}
+		catch (err) {
+		 res.write("Error found");
+		}
+		finally {
+			client.close();
+		}
 	});
 	  
-	try {
-// 	 client.connect();
-		res.write("Checkpoint 0 <br>");
-		client.connect();
-		var database = client.db("stock");
-    		var equities = database.collection("equities");
-		
-		res.write("Checkpoint 1 <br>");
-
-		const options = {
-			projection: { _id: 0, name: 1, ticker: 1 },
-		};
-		
-		res.write("Checkpoint 3 <br>");
-
-		const curs = equities.find({}, options);
-		
-		if ((curs.count()) === 0) {
-			console.log("No documents found!");
-			res.write("No documents found!");
-		}
-		
-		res.write("Checkpoint 4 <br>");
-		 curs.forEach(function(item) {
-			res.write("Checkpoint 5 <br>");
-			if(pdata['type_input'] === 'company') {
-				res.write("Type input equals company <br>");
-// 			if(item.Company == pdata['user_input']) {
-// 				let str = JSON.stringfy(item);
-// 				let string1 = str.replace(/["]+/g, '');
-// 				let string2 = string1.replace(/[{}]/g, "");
-// 				let string3 = string2.replace(/,/g, '  ');
-// 				res.write(string3 + "<br>");
-// 				console.log(item);
-// 			}
-			}
-		});
-		
-// 	 var dbo = client.db("stock");
-//          var coll = dbo.collection('equities');
-		res.write("checkpoint 0");
-	}
-	catch (err) {
-	 res.write("Error found");
-	}
-	finally {
-		client.close();
-	}
+	
   }
 }).listen(port);
 
