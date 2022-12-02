@@ -1,10 +1,10 @@
 {
-  "name": "calapp",
+  "name": "homework-12",
   "version": "1.0.0",
   "description": "node app ",
-  "main": "cal_demo2.js",
+  "main": "app.js",
   "scripts": {
-  "start": "node cal_demo2.js"
+  "start": "node app.js"
 },
   "repository": {
   "type": "git",
