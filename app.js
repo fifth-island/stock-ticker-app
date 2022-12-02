@@ -1,17 +1,16 @@
 var http = require('http');
 var qs = require('querystring');
 
-// var {MongoClient} = require("mongodb");
-// var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-// var client = new MongoClient(url);
 
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
 
-client = new MongoClient(url,{ useUnifiedTopology: true });
 
 
 var port = process.env.PORT || 3000;
+
+var user_value = "";
+var type_value = "";
 
 http.createServer(async function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
@@ -52,32 +51,44 @@ http.createServer(async function (req, res) {
 	req.on('end', () => {
 		pdata = qs.parse(pdata);
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
+		type_value = pdata['type_input'];
 		res.write ("The name is: " + pdata['user_input']);
+		user_value = pdata['user_input'];
 		
 	});
-	  
-	  	try {
-		res.write("Checkpoint 0 <br>");
-		await client.connect();
-		var database = client.db("stock");
-		var equities = database.collection("equities");
 
-		res.write("Checkpoint 1 <br>");
-		}
-		catch (err) {
-		 res.write("Error found");
-		}
-		finally {
-			client.close();
-		}
+ try {
+  await client.connect();
+  var dbo = client.db("stock");
+  var collection = dbo.collection("equities");
+  const options = {
+   projection: { _id: 0, name: 1, ticker: 1 },
+  };
+
+  const curs = collection.find({}, options);
+
+  if ((curs.count()) === 0 ) {
+   res.write("No documents found!");
+  }
+
+  await curs.forEach(function(item){
+   if(type_value == 'company') {
+    res.write("Your type_value is equal company");
+   }
+
+
+  });
+
+
+ } catch (err) {
+	 res.write("Error found");
+	}
+	finally {
+		client.close();
+	}
 	  
 	res.end();
 
   }
 }).listen(port);
 
-// async function connect() {
-//     await client.connect();
-//     await client.db("stock").command({ping: 1});
-//     console.log("Server Connected Successfully");
-// }
