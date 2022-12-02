@@ -47,7 +47,7 @@ http.createServer(function (req, res) {
 //   </html>
 //   `);
 //    return setHomePage(req, res);
-  else if (req.url == '/result' && req.method.toLowerCase() == 'post')
+  else if (req.url == '/result')
   res.write ("Process the form<br>");
 		 res.write ("Process the form<br>");
 		 pdata = "";
