@@ -54,7 +54,7 @@ http.createServer(function (req, res) {
            pdata += data.toString();
 			 
 			 console.log(pdata);
-			 res.write(pdata);
+			 res.write("Maleficent is a good: " + pdata);
          });
 	
 	res.end();
