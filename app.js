@@ -40,7 +40,7 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-	connect();
+	await connect();
 
 	pdata = "";
 	req.on('data', data => {
@@ -57,7 +57,7 @@ http.createServer(async function (req, res) {
   }
 }).listen(port);
 
-function connect() {
+async function connect() {
     MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
     if (err) {
         console.log("Unsuccessful connection to Mongo err: " + err);
