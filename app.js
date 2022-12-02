@@ -10,7 +10,7 @@ var qs = require('querystring');
 
 const mongodb = require('mongodb');
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
+// const uri = process.env.MONGODB_URI || "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
 
 
 
