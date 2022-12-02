@@ -46,7 +46,7 @@ http.createServer(function (req, res) {
 //   </html>
 //   `);
 //    return setHomePage(req, res);
-  else if (req.url == '/username' && req.method.toLowerCase() == 'post')
+  else if (req.url == '/result' && req.method.toLowerCase() == 'post')
   res.write ("This is the about page");
 //   return submitUserName(req, res);
    else 
