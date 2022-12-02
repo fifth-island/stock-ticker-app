@@ -50,6 +50,7 @@ http.createServer(function (req, res) {
   else if (req.url == '/result' && req.method.toLowerCase() == 'post')
   res.write ("Process the form<br>");
 		 pdata = "";
+	res.write("<br> Checkpoint 1 <br>");
 		 req.on('data', data => {
            pdata += data.toString();
 			 
