@@ -65,6 +65,9 @@ http.createServer(async function (req, res) {
 		console.log("Unsuccessful connection to Mongo err: " + err);
 		return;
 	    }
+	    
+            var dbs_stock = database.db('stock');
+   	    var mongo_collection = dbs_stock.collection('equities');
 		
         });
 	 
