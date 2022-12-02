@@ -5,10 +5,15 @@ var qs = require('querystring');
 // var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
 // var client = new MongoClient(url);
 
-const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
+// const MongoClient = require('mongodb').MongoClient;
+// const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
 
-client = new MongoClient(url,{ useUnifiedTopology: true });
+// client = new MongoClient(url,{ useUnifiedTopology: true });
+
+ const MongoClient = require('mongodb').MongoClient;
+ var MongoUrl = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority';
+
+ 
 
 
 var port = process.env.PORT || 3000;
@@ -42,18 +47,26 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-        try {
-	 client.connect();
-	 var dbo = client.db("stock");
-         var coll = dbo.collection('equities');
-		res.write("checkpoint 0");
-	}
-	catch (err) {
-	 res.write("Error found");
-	}
-	finally {
-		client.close();
-	}
+//         try {
+// 	 client.connect();
+// 	 var dbo = client.db("stock");
+//          var coll = dbo.collection('equities');
+// 		res.write("checkpoint 0");
+// 	}
+// 	catch (err) {
+// 	 res.write("Error found");
+// 	}
+// 	finally {
+// 		client.close();
+// 	}
+	  
+	MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
+	    if (err) {
+		console.log("Unsuccessful connection to Mongo err: " + err);
+		return;
+	    }
+		
+        });
 	 
 
 
