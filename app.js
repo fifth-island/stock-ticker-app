@@ -15,7 +15,7 @@ http.createServer(function (req, res) {
    <label>Company</label>
    <input type='radio' name='type_input' id="company_name" value="company">
    
-   <lable>Ticker</lable>
+   <label>Ticker</label>
    <input type='radio' name='type_input' id="company_ticker" value="ticker">
 
    <p> Now, provide a word to check in our database </p>
