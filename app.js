@@ -49,29 +49,18 @@ http.createServer(function (req, res) {
 //    return setHomePage(req, res);
   else if (req.url == '/result' && req.method.toLowerCase() == 'post')
   res.write ("Process the form<br>");
+		 res.write ("Process the form<br>");
 		 pdata = "";
-	res.write("<br> Checkpoint 1 <br>");
 		 req.on('data', data => {
-			 res.write("<br> Checkpoint 1.2 <br>");
            pdata += data.toString();
-        res.write("<br> Checkpoint 2 <br>");
-			 
          });
-	res.write("<br> Checkpoint 3 <br>");
-	
-	         req.on('end', () => { 
-			 pdata = qs.parse(pdata);
-			 res.write("<h1>Johnny</h1>");
-			 res.write("Johnny lai:" + pdata['type_input']);
-                 
-                 });        
-	res.end();
 
 		// when complete POST data is received
-// 		req.on('end', () => {
-// 			pdata = qs.parse(pdata);
-// 			res.write ("The name is: "+ pdata['type_input']);
-// 			res.end();
+		req.on('end', () => {
+			pdata = qs.parse(pdata);
+			res.write ("The name is: "+ pdata['user_input']);
+			res.end();
+		});
 }).listen(port);
 
 
