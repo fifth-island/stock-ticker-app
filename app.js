@@ -60,19 +60,7 @@ http.createServer(async function (req, res) {
 // 		client.close();
 // 	}
 	  
-	MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
-	    if (err) {
-		console.log("Unsuccessful connection to Mongo err: " + err);
-		return;
-	    }
-	    
-            var dbs_stock = database.db('stock');
-   	    var mongo_collection = dbs_stock.collection('equities');
-		
-        });
-	 
-
-
+	
 	pdata = "";
 	req.on('data', data => {
 		pdata += data.toString();
@@ -83,8 +71,32 @@ http.createServer(async function (req, res) {
 		pdata = qs.parse(pdata);
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		res.write ("The name is: " + pdata['user_input']);
+		
+		    MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
+		    if (err) {
+			console.log("Unsuccessful connection to Mongo err: " + err);
+			return;
+		    }
+
+		    var dbs_stock = database.db('stock');
+		    var mongo_collection = dbs_stock.collection('equities');
+		    mongo_collection.find(pdata['user_input']).toArray((err, result) => {
+		    if (err) throw err;
+// 		    res.send(parseData(result));
+
+		    });
+		
 		res.end();
 	});
+	  
+	
+	 
+
+
+		
+		
+		
+		
   }
 }).listen(port);
 
