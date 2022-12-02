@@ -6,7 +6,7 @@ var qs = require('querystring');
 // var client = new MongoClient(url);
 
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
+const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
 
 client = new MongoClient(url,{ useUnifiedTopology: true });
 
