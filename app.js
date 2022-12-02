@@ -68,7 +68,7 @@ http.createServer(async function (req, res) {
 			Ticker: 1;
 		};
 		
-		const curs = equities.find({}, options);
+// 		const curs = equities.find({}, options);
 		
 // 		if ((curs.count()) === 0) {
 // 			console.log("No documents found!");
