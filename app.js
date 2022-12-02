@@ -1,4 +1,7 @@
 var http = require('http');
+
+var port = process.env.PORT || 3000;
+
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/")
@@ -10,7 +13,7 @@ http.createServer(function (req, res) {
    else 
   res.write ("Unknown page request");
   res.end();
-}).listen(8080);
+}).listen(port);
 
 
 // const http = require('http');
