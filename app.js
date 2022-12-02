@@ -38,8 +38,27 @@ http.createServer(async function (req, res) {
 	res.write ("Process the form<br>");
 	
 // 	connect();
-	      client.connect();
-	  client.db("stock").command({ping: 1});
+	  
+	  /* connect to MongoDB cluster */
+	   MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
+	    if (err) {
+		console.log("Unsuccessful connection to Mongo err: " + err);
+		return;
+	    }
+
+	    /* access specific database and collection in the MongoDB cluster  */
+	    // var dbo_stock = database.db("stock");
+	    // var collection = dbo_stock.collection('equities');
+
+	    /* notify the user about the success process */
+	    console.log("The connection with the MongoDB was successful");
+
+	    /* import file data to the MongoDB database */
+// 	    importCSV(database);
+
+	});
+// 	      client.connect();
+// 	  client.db("stock").command({ping: 1});
 
 
 	pdata = "";
