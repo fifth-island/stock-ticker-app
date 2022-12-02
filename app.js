@@ -1,4 +1,5 @@
 var http = require('http');
+var qs = require('querystring');
 
 var port = process.env.PORT || 3000;
 
@@ -54,6 +55,7 @@ http.createServer(function (req, res) {
   });
   
   req.on('end', () => {
+  pdata =qs.parse(pdata);
   res.write ("The name is: " + pdata['type_input']);
   res.end();
   });
