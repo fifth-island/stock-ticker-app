@@ -4,9 +4,8 @@ var qs = require('querystring');
 var bodyparser = require('body-parser');
 
 var mongodb = require("mongodb");
-// var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-// var client = new MongoClient(url);
-const uri = process.env.MONGODB_URI || "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
+var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+var client = new MongoClient(url);
 
 
 
@@ -59,16 +58,20 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 function connect() {
-    var MongoClient = mongodb.MongoClient;
-    MongoClient.connect(uri, {useUnifiedTopology: true}, (err, db) => {
-        if (err) {
-            throw err;
-        }
-        var dbo = db.db("equities");
-        dbo.collection("equities").find(queryObj).toArray((err, result) => {
-            if (err) throw err;
-            res.send(parseData(result));
-            db.close();
-        });
+    MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
+    if (err) {
+        console.log("Unsuccessful connection to Mongo err: " + err);
+        throw err;
+    }
+	/* access specific database and collection in the MongoDB cluster  */
+   var dbs_stock = mongo_dbs.db('stock');
+   var mongo_collection = dbs_stock.collection('equities');
+	    
+	
+//         dbo.collection("equities").find(queryObj).toArray((err, result) => {
+//             if (err) throw err;
+//             res.send(parseData(result));
+//             db.close();
+//         });
     })
 }
