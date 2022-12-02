@@ -55,10 +55,10 @@ http.createServer(function (req, res) {
          });
 
 		// when complete POST data is received
-		req.on('end', () => {
-			pdata = qs.parse(pdata);
-			res.write ("The name is: "+ pdata['type_input']);
-			res.end();
+// 		req.on('end', () => {
+// 			pdata = qs.parse(pdata);
+// 			res.write ("The name is: "+ pdata['type_input']);
+// 			res.end();
 }).listen(port);
 
 
