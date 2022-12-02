@@ -37,7 +37,9 @@ http.createServer(async function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-	connect();
+// 	connect();
+	      client.connect();
+
 
 	pdata = "";
 	req.on('data', data => {
@@ -54,8 +56,8 @@ http.createServer(async function (req, res) {
   }
 }).listen(port);
 
-function connect() {
-    client.connect();
-    client.db("stock").command({ping: 1});
-    console.log("Server Connected Successfully");
-}
+// function connect() {
+//     client.connect();
+//     client.db("stock").command({ping: 1});
+//     console.log("Server Connected Successfully");
+// }
