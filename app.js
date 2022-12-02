@@ -1,10 +1,14 @@
 var http = require('http');
 var qs = require('querystring');
 
+var {MongoClient} = require("mongodb");
+var uri = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+var client = new MongoClient(uri);
+
+
 var port = process.env.PORT || 3000;
 
 http.createServer(async function (req, res) {
-  console.log("Server was successfully created");
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/") {
 	res.write(`
@@ -32,6 +36,9 @@ http.createServer(async function (req, res) {
    
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
+	
+	await connect();
+
 	pdata = "";
 	req.on('data', data => {
 		pdata += data.toString();
@@ -47,4 +54,8 @@ http.createServer(async function (req, res) {
   }
 }).listen(port);
 
-
+async function connect() {
+    await client.connect();
+    await client.db("stoker").command({ping: 1});
+    console.log("Server Connected Successfully");
+}
