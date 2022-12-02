@@ -1,22 +1,14 @@
 var http = require('http');
 var qs = require('querystring');
 
-// var bodyparser = require('body-parser');
-
-// var mongodb = require("mongodb");
-// var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
-// var client = new MongoClient(url);
-
-
-// const mongodb = require('mongodb');
-
-// const uri = process.env.MONGODB_URI || "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test";
-
+var {MongoClient} = require("mongodb");
+var url = 'mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/test';
+var client = new MongoClient(url);
 
 
 var port = process.env.PORT || 3000;
 
-http.createServer(function (req, res) {
+http.createServer(async function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/") {
 	res.write(`
@@ -45,19 +37,7 @@ http.createServer(function (req, res) {
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
 	
-// 	await connect();
-// 	var MongoClient = mongodb.MongoClient;
-//     MongoClient.connect(uri, {useUnifiedTopology: true}, (err, db) => {
-//         if (err) {
-//             throw err;
-//         }
-//         var dbo = db.db("stock");
-//         dbo.collection("equities").find(queryObj).toArray((err, result) => {
-//             if (err) throw err;
-//             res.write ("WORK PLEASE");
-//             db.close();
-//         });
-    })
+	connect();
 
 	pdata = "";
 	req.on('data', data => {
@@ -74,21 +54,8 @@ http.createServer(function (req, res) {
   }
 }).listen(port);
 
-// async function connect() {
-//     MongoClient.connect(MongoUrl, {useUnifiedTopology: true}, (err, database) => {
-//     if (err) {
-//         console.log("Unsuccessful connection to Mongo err: " + err);
-//         throw err;
-//     }
-// 	/* access specific database and collection in the MongoDB cluster  */
-//    var dbs_stock = mongo_dbs.db('stock');
-//    var mongo_collection = dbs_stock.collection('equities');
-	    
-	
-//         dbo.collection("equities").find(queryObj).toArray((err, result) => {
-//             if (err) throw err;
-//             res.send(parseData(result));
-//             db.close();
-//         });
-    })
+function connect() {
+    client.connect();
+    client.db("stock").command({ping: 1});
+    console.log("Server Connected Successfully");
 }
