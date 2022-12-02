@@ -5,7 +5,6 @@ var qs = require('querystring');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
 
-const client =new MongoClient(url,{ useUnifiedTopology: true });
 
 
 var port = process.env.PORT || 3000;
@@ -55,46 +54,64 @@ http.createServer(async function (req, res) {
 		type_value = pdata['type_input'];
 		res.write ("The name is: " + pdata['user_input']);
 		user_value = pdata['user_input'];
+
+  connectAndDisplay(user_value, type_value, res);
 		
 	});
-
- try {
-  res.write("Checkpoint 0");
-   client.connect();
-  var dbo = client.db("stock");
-  
-  res.write("Checkpoint 1");
-  var collection = dbo.collection("equities");
-  const options = {
-   projection: { _id: 0, name: 1, ticker: 1 },
-  };
-  
-  res.write("Checkpoint 2");
-
-  const curs = collection.find({}, options);
-
-  if ((curs.count()) === 0 ) {
-   res.write("No documents found!");
-  }
-
-  await curs.forEach(function(item){
-   if(type_value == 'company') {
-    res.write("Your type_value is equal company");
-   }
-
-
-  });
-
-
- } catch (err) {
-	 res.write("Error found");
-	}
-	finally {
-		client.close();
-	}
 	  
 	res.end();
 
   }
 }).listen(port);
 
+
+/* connectAndDisplay
+* Query the database and display information requested
+*/
+async function connectAndDisplay(target, type, res) {
+ var t = "";
+
+ MongoClient.connect(url, {useUnifiedTopology: true}, async (err, database) => {
+     if (err) {
+         console.log("Connection to Mongo err: " + err);
+         return;
+     }
+
+     // get database and collection object
+     var dbo = database.db("stock");
+     var collection = dbo.collection('equities');
+
+     try {
+         theQuery = "";
+         queryOptions = "";
+         if (type == "company") {
+             theQuery = {name: target};
+             queryOptions = {sort:{name:1}, projection:{_id:0, name:1, ticker:1}};
+             t += `<h2>Company: ${target} has ticker: </h2><br>`;
+         } else if (type == "ticker") {
+             theQuery = {ticker: target};
+             queryOptions = {sort:{name:1}, projection:{_id:0, name:1, ticker:1}};
+             t += `<h2>Companies with ticker code ${target} are: </h2><br>`;
+         }
+
+         var result = await collection.find(theQuery, queryOptions).toArray();
+         // console.log(result);
+
+         if (result.length === 0) {
+             console.log(`No results found`);
+             t += `No results found.`;
+         } else {
+             result.forEach(function (curr) {
+                 console.log(`${curr.name} has ticker ${curr.ticker}`);
+                 t += `${curr.name} (${curr.ticker})<br>`;
+             });
+         }
+     }
+
+     finally {
+         // console.log(`Writing Result and Closing DB`);
+         res.end(t);
+         database.close();
+     }
+ });
+}
