@@ -106,3 +106,29 @@ async function connect_table() {
 
 
 }
+
+
+//querys database aganist the users input and returns result
+async function clicker(req) {
+ const module = require('./search');//get functions in module.export from search.js
+ const adr = require('url');
+ var obj = adr.parse(req.url, true).query;//geting the query string
+ // console.log('inside function');
+ var promise;
+
+ if (type_value === 'company') {//user puts in a company name
+     // console.log('querying company name: ' + obj.search_bar);
+     promise = await module.mongoinsert(capitalize(user_value), '');
+ } else if (type_value === 'ticker') {//user puts in a stock ticker
+     // console.log('querying stock ticker: ' + obj.search_bar);
+     var tick = obj.search_bar.toUpperCase();//make the user stock ticker all uppercase
+     promise = await module.mongoinsert('', tick);
+ }
+ return promise;
+} 
+
+//capitalizes the first character of the company name before querying database
+function capitalize(word){
+ return word.charAt(0).toUpperCase() + word.slice(1);
+
+}
