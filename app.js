@@ -80,7 +80,7 @@ async function connect_table() {
   
   res.write("Checkpoint 2");
 
-  const curs = collection.find({}, options);
+  const curs = await collection.find({}, options);
 
   if ((curs.count()) === 0 ) {
    res.write("No documents found!");
