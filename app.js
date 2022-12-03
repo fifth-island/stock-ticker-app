@@ -37,7 +37,7 @@ http.createServer(async function (req, res) {
 
 		<input type='submit' name='form_ticker' value='Submit'>
 	`);
-	// res.end();			
+	res.end();			
    
   } else if (req.url == '/result') {
 	res.write ("Process the form<br>");
