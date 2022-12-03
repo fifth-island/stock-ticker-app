@@ -58,6 +58,14 @@ http.createServer(async function (req, res) {
 		
 	});
 
+ await connect_table();
+	  
+	res.end();
+
+  }
+}).listen(port);
+
+async function connect_table() {
  try {
   res.write("Checkpoint 0");
  
@@ -93,9 +101,7 @@ http.createServer(async function (req, res) {
 	finally {
 		client.close();
 	}
-	  
-	res.end();
 
-  }
-}).listen(port);
 
+
+}
