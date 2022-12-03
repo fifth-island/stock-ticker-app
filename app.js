@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 var http = require('http');
-const url = "mongodb+srv://fifth_island:comp20@cluster0.wqsv4y9.mongodb.net/?retryWrites=true&w=majority";
+const url = "mongodb+srv://dbUser1:mypw;@cluster0.rjmq5.mongodb.net/?retryWrites=true&w=majority";
 
 
 client =new MongoClient(url,{ useUnifiedTopology: true });
@@ -9,10 +9,11 @@ res.writeHead(200, {'Content-Type': 'text/html'});
 res.write('before mongo connect<br />');
 	try {
 		await client.connect();
-		var dbo = client.db("stock");
-		var coll = dbo.collection('equities');
+		var dbo = client.db("library");
+		var coll = dbo.collection('books');
 		const options = {
-		   projection: { _id: 0, name: 1, ticker: 1 },
+		   sort: { author: 1 },
+		   projection: { _id: 0, title: 1, author: 1 },
 		};
 		const curs = coll.find({},options);
 		// print a message if no documents were found
@@ -21,8 +22,8 @@ res.write('before mongo connect<br />');
 		}
 		//await curs.forEach(console.dir);
 		  await curs.forEach(function(item){
-			  res.write(item.name + "<br />");
-			  console.log(item.name);
+			  res.write(item.title + "<br />");
+			  console.log(item.title);
 		  });
 	  }  // end try 
 	  catch(err) {
@@ -33,4 +34,4 @@ res.write('before mongo connect<br />');
 	  }
 	  res.end();
   }  // end create server callback
-  ).listen(4000);
+  ).listen(8080);
