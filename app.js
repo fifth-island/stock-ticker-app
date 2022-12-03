@@ -58,6 +58,27 @@ http.createServer(async function (req, res) {
 		
 		pro = clicker(req);
 		
+		pro.then(
+		    (value) => {
+			hold = value;
+			console.log(hold);
+			console.log('after pressing submit ......');
+			res.write('<p>Results are the following: </p>');
+			value.forEach(element => {
+			    res.write('<p>Company name: ' + element.name + ' Stock Ticker: ' + element.ticker + '</p>');
+			    console.log("Checking foreach");
+			    console.log(element.name);
+			    console.log(element.ticker);
+			});
+		    },
+		    (error) => {
+			console.log(error);
+		    }
+		)
+		hold.forEach(element => {
+		    res.write(element.name + ', ' +  element.ticker);
+		})
+		
 		res.end();
 
 	});
