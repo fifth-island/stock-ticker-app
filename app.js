@@ -58,7 +58,7 @@ http.createServer(async function (req, res) {
 
 	});
 
-        await connect_table();
+//         await connect_table();
 	  
 	res.end();
 
