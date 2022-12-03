@@ -60,7 +60,7 @@ http.createServer((req, res) => {
 
 	});
 
-//         await connect_table();
+        await connect_table();
 	  
 
   }
