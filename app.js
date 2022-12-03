@@ -56,6 +56,8 @@ http.createServer(async function (req, res) {
 		res.write ("The name is: " + pdata['user_input']);
 		user_value = pdata['user_input'];
 		
+		pro = clicker(req);
+		
 		res.end();
 
 	});
