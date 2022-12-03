@@ -56,12 +56,12 @@ http.createServer((req, res) => {
 		res.write ("The name is: " + pdata['user_input']);
 		user_value = pdata['user_input'];	
 		
-		res.end();
 
 	});
 
         await connect_table();
-	  
+	res.end();
+
 
   }
 }).listen(port);
