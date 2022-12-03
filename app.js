@@ -56,10 +56,9 @@ http.createServer(async function (req, res) {
 		res.write ("The name is: " + pdata['user_input']);
 		user_value = pdata['user_input'];
 
-		await connect_table();
 	});
 
- 
+        await connect_table();
 	  
 	res.end();
 
