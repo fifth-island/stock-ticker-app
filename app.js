@@ -13,7 +13,7 @@ var port = process.env.PORT || 3000;
 var user_value = "";
 var type_value = "";
 
-http.createServer((req, res) => {
+http.createServer(async function (req, res) {
   res.writeHead(200, {'Content-Type':'text/html'});
   if (req.url == "/") {
 	res.write(`
@@ -55,13 +55,13 @@ http.createServer((req, res) => {
 		type_value = pdata['type_input'];
 		res.write ("The name is: " + pdata['user_input']);
 		user_value = pdata['user_input'];	
-		await connect_table();
-	res.end();
+		
+		res.end();
 
 	});
 
-        
-
+//         await connect_table();
+	  
 
   }
 }).listen(port);
