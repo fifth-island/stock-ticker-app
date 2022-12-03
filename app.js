@@ -54,9 +54,32 @@ http.createServer(async function (req, res) {
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		type_value = pdata['type_input'];
 		res.write ("The name is: " + pdata['user_input']);
-		user_value = pdata['user_input'];	
+		user_value = pdata['user_input'];
 		
-		res.end();
+		pro = await clicker(req);
+		
+		pro.then(
+		    (value) => {
+			hold = value;
+			console.log(hold);
+			console.log('after pressing submit ......');
+			res.write('<p>Results are the following: </p>');
+			value.forEach(element => {
+			    res.write('<p>Company name: ' + element.name + ' Stock Ticker: ' + element.ticker + '</p>');
+			    console.log("Checking foreach");
+			    console.log(element.name);
+			    console.log(element.ticker);
+			});
+		    },
+		    (error) => {
+			console.log(error);
+		    }
+		)
+		hold.forEach(element => {
+		    res.write(element.name + ', ' +  element.ticker);
+		})
+		
+		// res.end();
 
 	});
 
@@ -102,5 +125,33 @@ async function connect_table() {
 	finally {
 		client.close();
 	}
+
+
+
 }
 
+
+//querys database aganist the users input and returns result
+async function clicker(req) {
+ const module = require('./search');//get functions in module.export from search.js
+ const adr = require('url');
+ var obj = adr.parse(req.url, true).query;//geting the query string
+ // console.log('inside function');
+ var promise;
+
+ if (type_value === 'company') {//user puts in a company name
+     // console.log('querying company name: ' + obj.search_bar);
+     promise = await module.mongoinsert(capitalize(user_value), '');
+ } else if (type_value === 'ticker') {//user puts in a stock ticker
+     // console.log('querying stock ticker: ' + obj.search_bar);
+     var tick = obj.search_bar.toUpperCase();//make the user stock ticker all uppercase
+     promise = await module.mongoinsert('', tick);
+ }
+ return promise;
+} 
+
+//capitalizes the first character of the company name before querying database
+function capitalize(word){
+ return word.charAt(0).toUpperCase() + word.slice(1);
+
+}
