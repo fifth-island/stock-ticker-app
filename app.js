@@ -48,8 +48,7 @@ http.createServer((req, res) => {
 		pdata += data.toString();
 	});
 
-	// when complete POST data is received
-	req.on('end', () => {
+	
 		pdata = qs.parse(pdata);
 		res.write ("The type chosen is: " + pdata['type_input'] + "<br>");
 		type_value = pdata['type_input'];
@@ -81,7 +80,7 @@ http.createServer((req, res) => {
 		
 		// res.end();
 
-	});
+	
 
 //         await connect_table();
 	  
